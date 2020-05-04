@@ -1,0 +1,12 @@
+.topimage{
+	text-align: center;
+}
+
+.userProfile{
+	display: flex;
+}
+
+.userimg img{
+	width: 300px;
+	height: 300px;
+}

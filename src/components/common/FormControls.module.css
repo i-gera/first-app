@@ -1,0 +1,20 @@
+.formControl {
+    display: flex;
+    align-items: center;
+}
+
+.error input,
+.error textarea {
+    border: 2px solid orange;
+}
+
+.error span{
+    color: orange;
+    margin-left: 30px;
+}
+
+.borderError{
+    border: 2px solid red;
+    padding: 5px;
+    color: red;
+}

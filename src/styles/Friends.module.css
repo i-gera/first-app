@@ -1,0 +1,60 @@
+.blocks {
+  display: flex;
+  margin-top: 20px;
+}
+
+.block1 {
+  text-align: center;
+}
+
+/* .userimg {} */
+
+.userimg img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.block2 {
+  display: flex;
+  margin-left: 100px;
+}
+
+.followbtn {
+  margin-top: 10px;
+}
+
+.location {
+  margin-left: 30px;
+}
+
+.username {
+  font-style: bold;
+  color: red;
+}
+
+.status {
+  font-style: italic;
+  color: gray;
+}
+
+.country {
+  color: blue;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+.pages span {
+  margin-left: 10px;
+  padding: 0 2px;
+  font-size: 18px;
+}
+
+.selectedPage {
+  font-style: bold;
+  color: blue;
+  border-bottom: 1px solid blue;
+}

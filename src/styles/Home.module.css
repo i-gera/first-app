@@ -1,0 +1,38 @@
+.topimage{
+	text-align: center;
+}
+
+.desc{
+	max-width: 1000px;
+	text-align: center;
+	margin: 20px auto;
+}
+
+.info{
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 4fr 4fr 4fr;
+}
+
+.elemColumn{
+	text-align: center;
+	margin: 0 auto;
+}
+
+.elemImg{
+	
+}
+
+.elemImg img{
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	border: 1px solid yellow;
+}
+
+.elemText{
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 12px;
+	margin-top: 10px;
+}
