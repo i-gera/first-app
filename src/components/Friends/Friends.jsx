@@ -2,29 +2,17 @@ import React from "react";
 import styles from "../../styles/Friends.module.css";
 import userImg from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
+import Paginator from "./../common/Paginator";
 
 let Friends = (props) => {
-  let pagesCount = Math.ceil(props.totalCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
   return (
     <div>
-      <div className={styles.pages}>
-        {pages.map((p) => {
-          return (
-            <span
-              className={props.currentPage === p && styles.selectedPage}
-              onClick={(e) => {
-                props.onPageChanged(p);
-              }}
-            >
-              {p}
-            </span>
-          );
-        })}
-      </div>
+      <Paginator
+        totalCount={props.totalCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}
+      />
       {props.users.map((user) => (
         <div key={user.id}>
           <div className={styles.blocks}>

@@ -42,40 +42,34 @@ export const setUserAuthData = (userId, email, login, isAuth) => {
 }
 
 //thunkcreator
-export const getUserAuthData = () => {
-  return (dispatch) => {
-    return authAPI.authMe().then((data) => {
-      if (data.resultCode === 0) {
+export const getUserAuthData = () => async(dispatch) => {
+    let response = await authAPI.authMe();
+    
+	if (response.data.resultCode === 0) {
         dispatch(setUserAuthData(
-          data.data.id,
-          data.data.email,
-          data.data.login,
+          response.data.data.id,
+          response.data.data.email,
+          response.data.data.login,
 		  true
         ));
       }
-    });
-}
-}
+    }
 
-export const login = (email, password, rememberMe) =>  (dispatch) =>
- {
-	 authAPI.authLogin(email, password, rememberMe).then((data) => {
-      if (data.resultCode === 0) {
-		  dispatch(getUserAuthData())
-      } else {
-		 let message = data.messages[0] ? data.messages[0] : "error!!!";
-		  dispatch(stopSubmit("login", {_error: message}))
-		  
+export const login = (email, password, rememberMe) =>  async (dispatch) => {
+	 let response = await authAPI.authLogin(email, password, rememberMe);
+      if (response.data.resultCode === 0) {
+		  dispatch(getUserAuthData());
+      } 
+	  else {
+		 let message = response.data.messages[0] ? response.data.messages[0] : "error!!!";
+		  dispatch(stopSubmit("login", {_error: message}));		  
 	  }
-    });
-}
+    }
 
-
-export const logout = () =>  (dispatch) => {
-    authAPI.authLogout().then((data) => {
-      if (data.resultCode === 0) {
+export const logout = () => async(dispatch) => {
+    let response = await authAPI.authLogout();
+      if (response.data.resultCode === 0) {
 		  dispatch(setUserAuthData(null, null, null, false))
       }
-    });
-}
+    }
 

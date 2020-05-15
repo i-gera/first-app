@@ -2,9 +2,9 @@ import {
 	profileAPI
 } from '../../api/api';
 
-const ADD_POST = 'ADD_POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const ADD_POST = 'it_samurai_ADD_POST';
+const SET_USER_PROFILE = 'it_samurai_SET_USER_PROFILE';
+const SET_USER_STATUS = 'it_samurai_SET_USER_STATUS';
 
 let initialState = {
 	Comments: [{
@@ -79,27 +79,24 @@ export const setStatusToProfile = (status) => {
 	};
 }
 
-export const getUsersProfile = (userId) => (dispatch) => {
-	profileAPI.getProfile(userId).then(response => {
-		dispatch(setUsersToProfile(response.data));
-	});
 
-}
+//Thunk creators
+export const getUsersProfile = (userId) => async(dispatch) => {
+	let response = await profileAPI.getProfile(userId);
+	dispatch(setUsersToProfile(response.data));
+	}
 
-export const getUsersStatus = (userId) => (dispatch) => {
-	profileAPI.getStatus(userId).then(response => {
-		dispatch(setStatusToProfile(response.data));
-	});
+export const getUsersStatus = (userId) => async(dispatch) => {
+	let response = await profileAPI.getStatus(userId);
+	dispatch(setStatusToProfile(response.data));
+	}
 
-}
-
-export const updateUsersStatus = (status) => (dispatch) => {
-	profileAPI.updateStatus(status).then(response => {
-		if (response.data.resultCode === 0) {
-			dispatch(setStatusToProfile(status));
-		}
-	});
-
-}
+export const updateUsersStatus = (status) => async(dispatch) => {
+	let response = await profileAPI.updateStatus(status);
+	
+	if (response.data.resultCode === 0) {
+		dispatch(setStatusToProfile(status));
+	}
+	}
 
 export default ProfilePageReducer;

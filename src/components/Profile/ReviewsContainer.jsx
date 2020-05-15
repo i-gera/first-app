@@ -1,6 +1,6 @@
 // import React from "react";
 import Reviews from "./Reviews";
-import { addPost } from "../../redux/reducers/ProfilePage-reducer";
+import { addPost } from "../../redux/reducers/profile-reducer";
 import { connect } from "react-redux";
 
 let mapStateToProps = (state) => {

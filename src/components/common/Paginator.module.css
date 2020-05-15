@@ -1,0 +1,16 @@
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+.pages span {
+  margin-left: 10px;
+  padding: 0 2px;
+  font-size: 18px;
+}
+
+.selectedPage {
+  font-style: bold;
+  color: blue;
+  border-bottom: 1px solid blue;
+}

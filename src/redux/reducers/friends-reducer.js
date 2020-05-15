@@ -137,43 +137,36 @@ export const toggleFollowingProgress = (followInProgress, userId) => {
   };
 };
 
-export const getUsersThunk = (pageNumber, pageSize) => {
-  return (dispatch) => {
+
+//ThunkCreators
+export const getUsersThunk = (pageNumber, pageSize) => async (dispatch) => {
     dispatch(toggleIsFetching(true));
     dispatch(setCurrentPage(pageNumber));
 
-    usersAPI
-      .getUsers(pageNumber, pageSize)
-      .then((data) => {
-        dispatch(toggleIsFetching(false));
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUsersCount(data.totalCount));
-      });
-}
+    let response = await usersAPI.getUsers(pageNumber, pageSize);
+    dispatch(setUsers(response.data.items));
+    dispatch(setTotalUsersCount(response.data.totalCount));
+    dispatch(toggleIsFetching(false));
+
+      
 }
 
-export const followThunk = (userId) => {
-  return (dispatch) => {
+export const followThunk = (userId) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId));
-                      usersAPI.follow(userId).then((data) => {
-                        if (data.resultCode === 0) {
-                          dispatch(followUser(userId));
-                        }
-                        dispatch(toggleFollowingProgress(false, userId));
-                      });
-}
+    let response = await usersAPI.follow(userId);
+    if (response.data.resultCode === 0) {
+      dispatch(followUser(userId));
+      dispatch(toggleFollowingProgress(false, userId));
+    }        
 }
 
-export const unfollowThunk = (userId) => {
-  return (dispatch) => {
+export const unfollowThunk = (userId) => async (dispatch) => {
     dispatch(toggleFollowingProgress(true, userId));
-                      usersAPI.unfollow(userId).then((data) => {
-                        if (data.resultCode === 0) {
-                          dispatch(unfollowUser(userId));
-                        }
-                        dispatch(toggleFollowingProgress(false, userId));
-                      });
-}
+    let response = await usersAPI.unfollow(userId);
+    if (response.data.resultCode === 0) {
+      dispatch(unfollowUser(userId));
+      dispatch(toggleFollowingProgress(false, userId));
+    }
 }
 
 

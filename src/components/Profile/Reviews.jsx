@@ -4,10 +4,12 @@ import Review from "./Review";
 import ReviewsForm from "./ReviewsForm";
 import { reduxForm } from "redux-form";
 
-const Reviews = (props) => {
-  let commentElements = props.Comments.map((c) => (
-    <Review comment={c.comment} likes={c.likes} />
-  ));
+const Reviews = React.memo((props) => {
+  console.log("render");
+
+  let commentElements = [...props.Comments]
+    .reverse()
+    .map((c) => <Review comment={c.comment} likes={c.likes} />);
 
   let addReviewForm = (value) => {
     props.addPost(value.newCommentBody);
@@ -22,7 +24,7 @@ const Reviews = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const ReviewsReduxForm = reduxForm({ form: "reviewsForm" })(ReviewsForm);
 

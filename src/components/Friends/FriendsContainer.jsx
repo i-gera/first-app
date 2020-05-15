@@ -5,7 +5,7 @@ import {
   getUsersThunk,
   unfollowThunk,
   followThunk,
-} from "./../../redux/reducers/FriendsPage-reducer";
+} from "./../../redux/reducers/friends-reducer";
 import {
   getUsers,
   getPageSize,

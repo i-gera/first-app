@@ -1,5 +1,5 @@
 import Posts from "./Posts";
-import { sendMessage } from "./../../redux/reducers/PostsPage-reducer";
+import { sendMessage } from "./../../redux/reducers/posts-reducer";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
