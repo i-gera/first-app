@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/it-samurai/static/css/main.710dbca3.chunk.css",
+    "main.js": "/it-samurai/static/js/main.c827168d.chunk.js",
+    "main.js.map": "/it-samurai/static/js/main.c827168d.chunk.js.map",
+    "runtime-main.js": "/it-samurai/static/js/runtime-main.d89b4867.js",
+    "runtime-main.js.map": "/it-samurai/static/js/runtime-main.d89b4867.js.map",
+    "static/js/2.666f7f68.chunk.js": "/it-samurai/static/js/2.666f7f68.chunk.js",
+    "static/js/2.666f7f68.chunk.js.map": "/it-samurai/static/js/2.666f7f68.chunk.js.map",
+    "static/css/3.dea25c2d.chunk.css": "/it-samurai/static/css/3.dea25c2d.chunk.css",
+    "static/js/3.2e321c50.chunk.js": "/it-samurai/static/js/3.2e321c50.chunk.js",
+    "static/js/3.2e321c50.chunk.js.map": "/it-samurai/static/js/3.2e321c50.chunk.js.map",
+    "static/css/4.b9e7cdc6.chunk.css": "/it-samurai/static/css/4.b9e7cdc6.chunk.css",
+    "static/js/4.99fcd509.chunk.js": "/it-samurai/static/js/4.99fcd509.chunk.js",
+    "static/js/4.99fcd509.chunk.js.map": "/it-samurai/static/js/4.99fcd509.chunk.js.map",
+    "static/js/5.03b96e35.chunk.js": "/it-samurai/static/js/5.03b96e35.chunk.js",
+    "static/js/5.03b96e35.chunk.js.map": "/it-samurai/static/js/5.03b96e35.chunk.js.map",
+    "static/js/6.c0570a1c.chunk.js": "/it-samurai/static/js/6.c0570a1c.chunk.js",
+    "static/js/6.c0570a1c.chunk.js.map": "/it-samurai/static/js/6.c0570a1c.chunk.js.map",
+    "index.html": "/it-samurai/index.html",
+    "precache-manifest.18108eba2397afdc9495ce5198794776.js": "/it-samurai/precache-manifest.18108eba2397afdc9495ce5198794776.js",
+    "service-worker.js": "/it-samurai/service-worker.js",
+    "static/css/3.dea25c2d.chunk.css.map": "/it-samurai/static/css/3.dea25c2d.chunk.css.map",
+    "static/css/4.b9e7cdc6.chunk.css.map": "/it-samurai/static/css/4.b9e7cdc6.chunk.css.map",
+    "static/css/main.710dbca3.chunk.css.map": "/it-samurai/static/css/main.710dbca3.chunk.css.map",
+    "static/js/2.666f7f68.chunk.js.LICENSE.txt": "/it-samurai/static/js/2.666f7f68.chunk.js.LICENSE.txt",
+    "static/media/preloader.svg": "/it-samurai/static/media/preloader.e090b2b4.svg",
+    "static/media/user.png": "/it-samurai/static/media/user.d00d5149.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d89b4867.js",
+    "static/js/2.666f7f68.chunk.js",
+    "static/css/main.710dbca3.chunk.css",
+    "static/js/main.c827168d.chunk.js"
+  ]
+}
