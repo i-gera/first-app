@@ -5,6 +5,7 @@ import {
 const ADD_POST = 'it_samurai_ADD_POST';
 const SET_USER_PROFILE = 'it_samurai_SET_USER_PROFILE';
 const SET_USER_STATUS = 'it_samurai_SET_USER_STATUS';
+const SET_PHOTO_SUCCESS = 'it_samurai_SET_PHOTO_SUCCESS';
 
 let initialState = {
 	Comments: [{
@@ -53,11 +54,19 @@ const ProfilePageReducer = (state = initialState, action) => {
 				...state, status: action.status
 			};
 
+		case (SET_PHOTO_SUCCESS):
+			return {
+				...state, profile: {...state.profile, photos: action.photos}
+			};	
+
 		default:
 			return state;
 	}
 }
 
+export default ProfilePageReducer;
+
+//action Creators
 export const addPost = (newPostText) => {
 	return {
 		type: ADD_POST, 
@@ -76,6 +85,14 @@ export const setStatusToProfile = (status) => {
 	return {
 		type: SET_USER_STATUS,
 		status
+	};
+}
+
+export const setPhotoToProfile = (photos) => {
+	debugger;
+	return {
+		type: SET_PHOTO_SUCCESS,
+		photos
 	};
 }
 
@@ -99,4 +116,10 @@ export const updateUsersStatus = (status) => async(dispatch) => {
 	}
 	}
 
-export default ProfilePageReducer;
+export const savePhoto = (photoFile) => async(dispatch) => {
+	let response = await profileAPI.savePhoto(photoFile);
+	
+	if (response.data.resultCode === 0) {
+		dispatch(setPhotoToProfile(response.data.data.photos));
+	}
+	}

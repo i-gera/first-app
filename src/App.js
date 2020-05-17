@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from "redux";
 import { Provider, connect } from 'react-redux';
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {HashRouter, Route, withRouter} from 'react-router-dom';
 import store from './redux/redux-store.js';
 import {initializeApp} from './redux/reducers/app-reducer';
 import './App.css';
@@ -50,11 +50,11 @@ const mapStateToProps = (state) => {
 const AppContentContainer=  compose(withRouter, connect(mapStateToProps, { initializeApp }))(AppContent);
 
 const App = (props) => {
-	return (<BrowserRouter>
+	return (<HashRouter>
 			    <Provider store={store}>
                      <AppContentContainer />
                 </Provider>
-	    	</BrowserRouter>
+	    	</HashRouter>
 			)
 }
 export default App;

@@ -9,6 +9,12 @@ const ProfileInfo = (props) => {
     return <Preloader />;
   }
 
+  const onPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  };
+
   return (
     <div>
       <div className={style.userProfile}>
@@ -23,6 +29,11 @@ const ProfileInfo = (props) => {
               alt=""
             />
           </div>
+          {props.isOwner && (
+            <div>
+              <input type="file" onChange={onPhotoSelected} />
+            </div>
+          )}
           <div>{props.profile.aboutMe}</div>
         </div>
         <div>
