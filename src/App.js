@@ -5,16 +5,16 @@ import {HashRouter, Route, withRouter} from 'react-router-dom';
 import store from './redux/redux-store.js';
 import {initializeApp} from './redux/reducers/app-reducer';
 import './App.css';
-import HeaderContainer from './components/HeaderContainer';
-import Nav from './components/Nav';
-import Home from './components/Home';
+import HeaderContainer from './components/Header/HeaderContainer';
+import Nav from './components/Nav/Nav';
+import Home from './components/Home/Home';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import Preloader from './components/common/Preloader';
+import Preloader from './components/common/Preloader/Preloader';
 import { withSuspense } from './hoc/withSuspense';
-const FriendsContainer = React.lazy(() => import('./components/Friends/FriendsContainer'));
+import FriendsContainer from './components/Friends/FriendsContainer';
 const Contacts = React.lazy(() => import('./components/Contacts/Contacts'));
 const PostsContainer = React.lazy(() => import('./components/Posts/PostsContainer'));
-const Login = React.lazy(() => import('./components/Login'));
+const Login = React.lazy(() => import('./components/Login/Login'));
 
 class AppContent extends React.Component {
 	componentDidMount() {
@@ -32,7 +32,7 @@ class AppContent extends React.Component {
 					<Route path = '/profile/:userId?' render = {() => <ProfileContainer /> } /> 
 					<Route path = '/home' render = {() => <Home />} />   
 					<Route path = '/posts' render = {withSuspense(PostsContainer)} /> 
-					<Route path = '/friends' render = {withSuspense(FriendsContainer)}/>    
+					<Route path = '/friends' render = {() => <FriendsContainer pageTitle="All Friends"/> }/>    
 					<Route path = '/login' render = {withSuspense(Login)}/>  				 
 					<Route path = '/contacts' render = {withSuspense(Contacts)} />  				
 				</div> 

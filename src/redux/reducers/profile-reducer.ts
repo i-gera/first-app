@@ -1,27 +1,17 @@
 import { profileAPI } from "../../api/api";
+import { CommentsType, ProfileType, PhotosType, ContactsType } from "../../types/types";
 
 const ADD_POST = "it_samurai_ADD_POST";
 const SET_USER_PROFILE = "it_samurai_SET_USER_PROFILE";
 const SET_USER_STATUS = "it_samurai_SET_USER_STATUS";
 const SET_PHOTO_SUCCESS = "it_samurai_SET_PHOTO_SUCCESS";
 
-type CommentsType = {
-  id: number;
-  comment: string;
-  likes: number;
-};
-
-type ProfileType = {
-  id: number;
-  comment: string;
-  likes: number;
-};
 let initialState = {
   Comments: [
     {
       id: 1,
       comment: "Hi, how are you?",
-      likes: 20,
+      likes: 20
     },
     {
       id: 2,
@@ -34,11 +24,14 @@ let initialState = {
       likes: 30,
     },
   ] as Array<CommentsType>,
+  newPostText: "",
   profile: null as ProfileType | null,
   status: "",
 };
 
-const ProfilePageReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState;
+
+const ProfilePageReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case ADD_POST:
       let newPost = action.newPostText;
@@ -69,7 +62,7 @@ const ProfilePageReducer = (state = initialState, action) => {
     case SET_PHOTO_SUCCESS:
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photos },
+        profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
 
     default:
@@ -80,29 +73,47 @@ const ProfilePageReducer = (state = initialState, action) => {
 export default ProfilePageReducer;
 
 //action Creators
-export const addPost = (newPostText) => {
+type AddPostActionType = {
+    type: typeof ADD_POST
+    newPostText: string
+}
+export const addPost = (newPostText:string): AddPostActionType => {
   return {
     type: ADD_POST,
     newPostText,
   };
 };
 
-export const setUsersToProfile = (profile) => {
+type SetUsersToProfileActionType = {
+    type: typeof SET_USER_PROFILE
+    profile: ProfileType
+}
+
+export const setUsersToProfile = (profile: ProfileType): SetUsersToProfileActionType => {
   return {
     type: SET_USER_PROFILE,
-    profile,
+    profile
   };
 };
 
-export const setStatusToProfile = (status) => {
+type SetStatusToProfileActionType ={
+    type: typeof SET_USER_STATUS
+    status: string | null
+}
+
+export const setStatusToProfile = (status: string | null): SetStatusToProfileActionType => {
   return {
     type: SET_USER_STATUS,
     status,
   };
 };
 
-export const setPhotoToProfile = (photos) => {
-  debugger;
+type SetPhotoToProfileActionType = {
+    type: typeof SET_PHOTO_SUCCESS 
+    photos: PhotosType
+}
+
+export const setPhotoToProfile = (photos: PhotosType): SetPhotoToProfileActionType => {
   return {
     type: SET_PHOTO_SUCCESS,
     photos,
@@ -110,17 +121,17 @@ export const setPhotoToProfile = (photos) => {
 };
 
 //Thunk creators
-export const getUsersProfile = (userId) => async (dispatch) => {
+export const getUsersProfile = (userId:number) => async (dispatch:any) => {
   let response = await profileAPI.getProfile(userId);
   dispatch(setUsersToProfile(response.data));
 };
 
-export const getUsersStatus = (userId) => async (dispatch) => {
+export const getUsersStatus = (userId:number) => async (dispatch:any) => {
   let response = await profileAPI.getStatus(userId);
   dispatch(setStatusToProfile(response.data));
 };
 
-export const updateUsersStatus = (status) => async (dispatch) => {
+export const updateUsersStatus = (status: string | null) => async (dispatch: any) => {
   let response = await profileAPI.updateStatus(status);
 
   if (response.data.resultCode === 0) {
@@ -128,7 +139,7 @@ export const updateUsersStatus = (status) => async (dispatch) => {
   }
 };
 
-export const savePhoto = (photoFile) => async (dispatch) => {
+export const savePhoto = (photoFile:any) => async (dispatch:any) => {
   let response = await profileAPI.savePhoto(photoFile);
 
   if (response.data.resultCode === 0) {

@@ -1,14 +1,6 @@
+import { DialogType, MessageType } from "../../types/types";
+
 const SEND_MESSAGE = "SEND_MESSAGE";
-
-type DialogType = {
-  id: number;
-  name: string;
-};
-
-type MessageType = {
-  id: number;
-  message: string;
-};
 
 let initialState = {
   Dialogs: [
