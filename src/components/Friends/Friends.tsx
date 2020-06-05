@@ -4,7 +4,6 @@ import userImg from "../../assets/images/user.png";
 import { NavLink } from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 import { UserType } from "../../types/types";
-// import { PropsType } from "./FriendsTypes";
 
 type PropsType = {
     totalCount: number

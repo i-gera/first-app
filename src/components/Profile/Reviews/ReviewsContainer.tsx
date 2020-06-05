@@ -1,6 +1,6 @@
 // import React from "react";
 import Reviews from "./Reviews";
-import { addPost } from "../../../redux/reducers/profile-reducer";
+import { actions} from "../../../redux/reducers/profile-reducer";
 import { connect } from "react-redux";
 import { AppStateType } from "../../../redux/redux-store";
 import { MapStatePropsType, MapDispatchPropsType, OwnPropsType } from "./ReviewsTypes";
@@ -12,6 +12,6 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-const ReviewsContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, { addPost })(Reviews);
+const ReviewsContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {addPost: actions.addPost} )(Reviews);
 
 export default ReviewsContainer;

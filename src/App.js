@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from "redux";
 import { Provider, connect } from 'react-redux';
 import {HashRouter, Route, withRouter} from 'react-router-dom';
-import store from './redux/redux-store.js';
+import store from './redux/redux-store';
 import {initializeApp} from './redux/reducers/app-reducer';
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';

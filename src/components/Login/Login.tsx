@@ -1,27 +1,28 @@
-import React from "react";
-import { reduxForm } from "redux-form";
+import React, { FC } from "react";
+import { reduxForm, InjectedFormProps } from "redux-form";
 import { Input, fieldCreator } from "../common/FormControls/FormControls";
 import { required, maxLengthCreator } from "../../utils/validators/validator";
 import { connect } from "react-redux";
 import { login } from "../../redux/reducers/auth-reducer";
 import { Redirect } from "react-router-dom";
 import style from "./../common/FormControls/FormControls.module.css";
+import { AppStateType } from "../../redux/redux-store";
 
 const maxLength15 = maxLengthCreator(15);
 const maxLength20 = maxLengthCreator(20);
 
-const LoginForm = (props) => {
+const LoginForm: FC<InjectedFormProps<LoginFormValuesType> > = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      {fieldCreator(Input, "email", "Email", [required, maxLength20])}
-      {fieldCreator(Input, "password", "Password", [required, maxLength15], {
+      {fieldCreator<LoginPropertiesTypeKeys>(Input, "email", "Email", [required, maxLength20])}
+      {fieldCreator<LoginPropertiesTypeKeys>(Input, "password", "Password", [required, maxLength15], {
         type: "password",
       })}
-      {fieldCreator(
+      {fieldCreator<LoginPropertiesTypeKeys>(
         Input,
         "rememberMe",
-        null,
-        null,
+        undefined,
+        [],
         {
           type: "checkbox",
         },
@@ -35,13 +36,31 @@ const LoginForm = (props) => {
   );
 };
 
-let LoginReduxForm = reduxForm({
+let LoginReduxForm = reduxForm<LoginFormValuesType>({
   // a unique name for the form
   form: "login",
 })(LoginForm);
 
-let Login = (props) => {
-  const onSubmit = (formData) => {
+type LoginMapStatePropsType = {
+    isAuth: boolean
+}
+
+type LoginMapDispatchPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
+
+type LoginPropsType = LoginMapStatePropsType & LoginMapDispatchPropsType;
+
+export type LoginFormValuesType = {
+    email: string 
+    password: string 
+    rememberMe: boolean
+}
+
+type LoginPropertiesTypeKeys  = Extract<keyof LoginFormValuesType, string>;
+
+let Login: FC<LoginPropsType> = (props) => {
+  const onSubmit = (formData: any) => {
     props.login(formData.email, formData.password, formData.rememberMe);
   };
 
@@ -56,7 +75,7 @@ let Login = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType): LoginMapStatePropsType => {
   return {
     isAuth: state.auth.isAuth,
   };

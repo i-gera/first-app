@@ -1,63 +1,31 @@
 import { DialogType, MessageType } from "../../types/types";
-
-const SEND_MESSAGE = "SEND_MESSAGE";
+import { InferActionsTypes } from "../redux-store";
 
 let initialState = {
   Dialogs: [
-    {
-      name: "Gera",
-      id: 1,
-    },
-    {
-      name: "Aibol",
-      id: 2,
-    },
-    {
-      name: "Arys",
-      id: 3,
-    },
-    {
-      name: "Arya",
-      id: 4,
-    },
+    { name: "Gera", id: 1 },
+    { name: "Aibol", id: 2 },
+    { name: "Arys", id: 3 },
+    { name: "Arya", id: 4 },
   ] as Array<DialogType>,
   Messages: [
-    {
-      id: 1,
-      message: "HI!",
-    },
-    {
-      id: 2,
-      message: "HI!!",
-    },
-    {
-      id: 3,
-      message: "HI!!!",
-    },
-    {
-      id: 4,
-      message: "HI!!!!",
-    },
+    { id: 1, message: "HI!" },
+    { id: 2, message: "HI!!" },
+    { id: 3, message: "HI!!!" },
+    { id: 4, message: "HI!!!!" },
   ] as Array<MessageType>,
 };
-
 export type InitialStateType = typeof initialState;
 
-const PostsPageReducer = (
-  state = initialState,
-  action: any
-): InitialStateType => {
+export const PostsReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case SEND_MESSAGE:
+    case "SEND_MESSAGE":
       let body = action.newMessageBody;
       return {
         ...state,
         Messages: [
           ...state.Messages,
-          {
-            id: 7,
-            message: body,
-          },
+          { id: 7, message: body }
         ],
       };
 
@@ -66,16 +34,9 @@ const PostsPageReducer = (
   }
 };
 
-type sendMessageActionType = {
-  type: typeof SEND_MESSAGE;
-  newMessageBody: string;
-};
+export type ActionsType = InferActionsTypes<typeof actions>
 
-export const sendMessage = (newMessageBody: string): sendMessageActionType => {
-  return {
-    type: SEND_MESSAGE,
-    newMessageBody,
-  };
-};
+export const actions = {
+    sendMessage : (newMessageBody: string) => ({ type: 'SEND_MESSAGE', newMessageBody } as const)
+}
 
-export default PostsPageReducer;

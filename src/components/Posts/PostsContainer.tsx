@@ -1,5 +1,5 @@
 import Posts from "./Posts";
-import { sendMessage } from "../../redux/reducers/posts-reducer";
+import { actions } from "../../redux/reducers/posts-reducer";
 import { connect } from "react-redux";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
@@ -11,11 +11,11 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     // newMessageBody: state.PostsPage.newMessageBody,
     Dialogs: state.PostsPage.Dialogs,
     Messages: state.PostsPage.Messages,
-  };
+  }
 };
 
 const PostsContainer = compose(
-  connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, { sendMessage }),
+  connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {sendMessage: actions.sendMessage}),
   withAuthRedirect
 )(Posts);
 
