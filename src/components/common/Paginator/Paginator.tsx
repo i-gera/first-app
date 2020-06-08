@@ -1,6 +1,13 @@
 import React, { useState, FC } from "react";
 import styles from "./Paginator.module.css";
-import { PropsType } from "./PaginatorTypes";
+
+export type PropsType = {
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    portionSize?: number
+}
 
 const Paginator: FC<PropsType> = ({
   totalCount,
@@ -37,7 +44,7 @@ const Paginator: FC<PropsType> = ({
         .map((p) => {
           return (
             <span
-              className={currentPage === p && styles.selectedPage}
+              className={currentPage === p ? styles.selectedPage : ''}
               onClick={(e) => {
                 onPageChanged(p);
               }}

@@ -9,10 +9,10 @@ let initialState = {
     { name: "Arya", id: 4 },
   ] as Array<DialogType>,
   Messages: [
-    { id: 1, message: "HI!" },
-    { id: 2, message: "HI!!" },
-    { id: 3, message: "HI!!!" },
-    { id: 4, message: "HI!!!!" },
+    { message: "HI!", id: 1 },
+    { message: "HI!!", id: 2 },
+    { message: "HI!!!",id: 3 },
+    { message: "HI!!!!", id: 4 },
   ] as Array<MessageType>,
 };
 export type InitialStateType = typeof initialState;

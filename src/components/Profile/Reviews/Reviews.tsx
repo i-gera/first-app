@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import style from "./Reviews.module.css";
 import Review from "./Review";
-import ReviewsForm from "./ReviewsForm";
-import { reduxForm } from "redux-form";
+import {ReviewsReduxForm, ReviewFormValuesType } from "./ReviewsForm";
 import { PropsType } from "./ReviewsTypes";
+
 
 const Reviews: FC<PropsType> = React.memo((props) => {
   console.log("render");
@@ -12,7 +12,7 @@ const Reviews: FC<PropsType> = React.memo((props) => {
     .reverse()
     .map((c) => <Review comment={c.comment} likes={c.likes} />);
 
-  let addReviewForm = (value:any) => {
+  let addReviewForm = (value: ReviewFormValuesType) => {
     props.addPost(value.newCommentBody);
   };
 
@@ -26,7 +26,5 @@ const Reviews: FC<PropsType> = React.memo((props) => {
     </div>
   );
 });
-
-const ReviewsReduxForm = reduxForm({ form: "reviewsForm" })(ReviewsForm);
 
 export default Reviews;

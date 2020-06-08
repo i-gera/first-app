@@ -1,22 +1,17 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, ChangeEvent } from "react";
 import style from "./ProfileInfo.module.css";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
 import Preloader from "../../common/Preloader/Preloader";
 import userImg from "../../../assets/images/user.png";
 import ProfileDataForm from "./ProfileDataForm";
-import { ProfileType } from "../../../types/types";
+import { ProfileType, ContactsType } from "../../../types/types";
 
-type ContactType = {
-    contactTitle: string
-    contactValue: string
-}
 type PropsType = {
-    profile: ProfileType
+    profile: ProfileType | null
     isOwner: boolean
-    status: string 
-
-    updateStatus: (status: string | null) => void
-    savePhoto: (photoFile: any) => void
+    status: string
+    updateStatus: (status: string) => void
+    savePhoto: (photoFile: File) => void
 }
 const ProfileInfo: FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
@@ -25,8 +20,8 @@ const ProfileInfo: FC<PropsType> = (props) => {
     return <Preloader />;
   }
 
-  const onPhotoSelected = (e: any) => {
-    if (e.target.files.length) {
+  const onPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
       props.savePhoto(e.target.files[0]);
     }
   };
@@ -76,6 +71,7 @@ export type ProfileDataType = {
     isOwner: boolean
     activateEditMode: () => void
 }
+
 const ProfileData: FC<ProfileDataType> = ({ profile, isOwner, activateEditMode }) => {
   return (
     <div>
@@ -109,7 +105,7 @@ const ProfileData: FC<ProfileDataType> = ({ profile, isOwner, activateEditMode }
             <Contact
               key={key}
               contactTitle={key}
-              contactValue={profile.contacts[key]}
+              contactValue={profile.contacts[key as keyof ContactsType]}
             />
           );
         })}
@@ -117,6 +113,11 @@ const ProfileData: FC<ProfileDataType> = ({ profile, isOwner, activateEditMode }
     </div>
   );
 };
+
+type ContactType = {
+    contactTitle: string
+    contactValue: string
+}
 
 const Contact: FC<ContactType> = ({ contactTitle, contactValue }) => {
   return (

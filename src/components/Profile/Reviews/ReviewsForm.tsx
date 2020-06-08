@@ -1,27 +1,28 @@
-import React from "react";
-import style from "./Reviews.module.css";
-import { Field } from "redux-form";
+import React, { FC } from "react";
+// import style from "./Reviews.module.css";
+import { InjectedFormProps, reduxForm } from "redux-form";
 import { required, maxLengthCreator } from "../../../utils/validators/validator";
-import { Textarea } from "../../common/FormControls/FormControls";
+import { Textarea, fieldCreator } from "../../common/FormControls/FormControls";
 
+export type ReviewFormValuesType = {
+    newCommentBody: string 
+}
+type PropsType = {
 
+}
+type ReviewPropertiesTypeKeys  = Extract<keyof ReviewFormValuesType, string>;
 const maxLength20 = maxLengthCreator(20);
-const ReviewsForm = (props) => {
+
+const ReviewsForm: FC<InjectedFormProps<ReviewFormValuesType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <div className={style.new}>
-        <Field
-          component={Textarea}
-          name="newCommentBody"
-          placeholder="enter your comment"
-          validate={[required, maxLength20]}
-        />
+      {fieldCreator<ReviewPropertiesTypeKeys>(Textarea, "newCommentBody", "enter your comment", [required, maxLength20])}
         <div>
-          <button>Add comment</button>
+          <button type="submit">Add comment</button>
         </div>
-      </div>
     </form>
   );
 };
 
-export default ReviewsForm;
+export const ReviewsReduxForm = reduxForm<ReviewFormValuesType>({ form: "reviewsForm" })(ReviewsForm);
+

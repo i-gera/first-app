@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentType } from "react";
 import { connect } from "react-redux";
 import {
   getUsersThunk,
@@ -61,7 +61,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
   };
 };
 
-export default compose(
+export default compose<ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, AppStateType>(mapStateToProps, {
     getUsersThunk,
     unfollowThunk,

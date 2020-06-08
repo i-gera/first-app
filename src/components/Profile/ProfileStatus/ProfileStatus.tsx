@@ -3,15 +3,15 @@ import React, { useState, useEffect, FC, ChangeEvent } from "react";
 
 type PropsType = {
     status: string
-    updateStatus: (status: string | null) => void
+    updateStatus: (status: string) => void
 }
 
 type StateType = {
-    editMode: boolean
+    editMode?: boolean
     status: string
 }
 
-const ProfileStatus: FC<PropsType, StateType> = (props) => {
+const ProfileStatus: FC<PropsType & StateType> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState(props.status);
 

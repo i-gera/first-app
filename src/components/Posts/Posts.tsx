@@ -2,20 +2,19 @@ import React, { FC } from "react";
 import style from "./Posts.module.css";
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
-import PostsForm from "./PostsForm";
-import { reduxForm } from "redux-form";
-import { PropsType } from "./PostsTypes";
+import {PostsReduxForm, PostsFormValuesType} from "./PostsForm";
+import { PostsPropsType } from "./PostsContainer";
 
-const Posts: FC<PropsType> = ({Dialogs, Messages, sendMessage}) => {
-  let DialogElements = Dialogs.map((d) => (
+const Posts: FC<PostsPropsType> = ({postsPage, sendMessage}) => {
+  let DialogElements = postsPage.Dialogs.map((d) => (
     <Dialog name={d.name} id={d.id} />
   ));
 
-  let MessageElements = Messages.map((m) => (
+  let MessageElements = postsPage.Messages.map((m) => (
     <Message message={m.message} id={m.id} />
   ));
 
-  let addPostForm = (value) => {
+  let addPostForm = (value: PostsFormValuesType) => {
     sendMessage(value.newMessageBody);
   };
 
@@ -29,7 +28,5 @@ const Posts: FC<PropsType> = ({Dialogs, Messages, sendMessage}) => {
     </div>
   );
 };
-
-const PostsReduxForm = reduxForm({ form: "postsForm" })(PostsForm);
 
 export default Posts;

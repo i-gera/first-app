@@ -6,25 +6,26 @@ import { ProfileType } from "../../types/types";
 
 type PropsType = {
     isOwner: boolean
-    profile: ProfileType
+    profile: ProfileType | null
     status: string
-
-    savePhoto: () => void
-    updateStatus: () => void
+    updateStatus: (status: string) => void
+    savePhoto: (photoFile: File) => void
 }
+
 const Profile: FC<PropsType> = (props) => {
-  return (
-    <div>
-      <ProfileInfo
-        savePhoto={props.savePhoto}
-        isOwner={props.isOwner}
-        profile={props.profile}
-        status={props.status}
-        updateStatus={props.updateStatus}
-      />
-      <ReviewsContainer />
-    </div>
-  );
+    return (
+        <div>
+            <ProfileInfo
+                isOwner={props.isOwner}
+                profile={props.profile}
+                status={props.status}
+                updateStatus={props.updateStatus}
+                savePhoto={props.savePhoto}
+
+            />
+            <ReviewsContainer />
+        </div>
+    );
 };
 
 export default Profile;
